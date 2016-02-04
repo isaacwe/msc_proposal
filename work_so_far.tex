@@ -1,0 +1,196 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  pth notes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[onecolumn,fleqn]{revtex4}
+
+% special 
+\usepackage{ifthen}
+\usepackage{ifpdf}
+\usepackage{float}
+\usepackage{color}
+\usepackage{subfig}
+\usepackage{caption}
+
+% fonts
+\usepackage{latexsym}
+\usepackage{amsmath} 
+\usepackage{amssymb} 
+\usepackage{bm}
+\usepackage{wasysym}
+
+
+\ifpdf
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\else
+\usepackage{graphicx}
+\usepackage{epsfig}
+\fi
+
+\graphicspath{{./G_calc_figs/}}
+
+\usepackage[pdftitle={},bookmarks]{hyperref}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Standard symbols 
+\newcommand{\sinc}{\mbox{sinc}}
+\newcommand{\const}{\mbox{const}}
+\newcommand{\trc}{\mbox{trace}}
+\newcommand{\intt}{\int\!\!\!\!\int }
+\newcommand{\ointt}{\int\!\!\!\!\int\!\!\!\!\!\circ\ }
+\newcommand{\ar}{\mathsf r}
+\newcommand{\im}{\mbox{Im}}
+\newcommand{\re}{\mbox{Re}}
+
+% Special symbols
+\newcommand{\mass}{\mathsf{m}} 
+\newcommand{\Mass}{\mathsf{M}} 
+
+% Math constractions
+\newcommand{\tbox}[1]{\mbox{\tiny #1}}
+\newcommand{\bmsf}[1]{\bm{\mathsf{#1}}} 
+\newcommand{\amatrix}[1]{\begin{matrix} #1 \end{matrix}} 
+\newcommand{\eexp}[1]{\mathrm{e}^{#1}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\bra}[1]{\left\langle #1 \right|}
+\newcommand{\ket}[1]{\left| #1 \right\rangle}
+\newcommand{\braket}[2]{ \left\langle #1 \middle| #2 \right\rangle}
+
+% Equations
+\newcommand{\be}[1]{\begin{eqnarray}\ifthenelse{#1=-1}{\nonumber}{\ifthenelse{#1=0}{}{\label{e#1}}}}
+\newcommand{\beq}{\begin{eqnarray}}
+\newcommand{\eeq}{\end{eqnarray}} 
+
+% Text arrangement
+\newcommand{\hide}[1]{}
+\newcommand{\rmrk}[1]{\textcolor{red}{#1}}
+\newcommand{\Eq}[1]{\textcolor{blue}{Eq.\!\!~(\ref{#1})}} 
+\newcommand{\Fig}[1]{\textcolor{blue}{Fig.}\!\!~\ref{#1}}
+\newcommand{\drawline}{\begin{picture}(500,1)\line(1,0){500}\end{picture}}
+\newcommand{\bitem}{$\bullet$ \ \ \ }
+\newcommand{\Cn}[1]{\begin{center} #1 \end{center}}
+\newcommand{\mpg}[2][1.0\hsize]{\begin{'}[b]{#1}{#2}\end{'}}
+\newcommand{\mpgt}[2][1.0\hsize]{\begin{'}[t]{#1}{#2}\end{'}}
+
+
+%New
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Page setup
+\setlength{\parindent}{0cm} 
+\setlength{\parskip}{0.3cm} 
+
+%counters
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\setcounter{section}{0}
+\setcounter{subsection}{0}
+
+% Sections
+\newcommand{\sect}[1]
+{
+\addtocounter{section}{1} 
+\setcounter{subsection}{0}
+\ \\ 
+\pdfbookmark[2]{\thesection. \ #1}{sect.\thesection}
+{\Large\bf $=\!=\!=\!=\!=\!=\;$ [\thesection] \ #1}  
+\nopagebreak
+}
+
+% subections
+\newcommand{\subsect}[1]
+{
+\addtocounter{subsection}{1} 
+\ \\ 
+\pdfbookmark[2]{\ \ \ \ \thesection.\thesubsection. \ #1}{subsect.\thesection.\thesubsection}
+{\bf $=\!=\!=\!=\!=\!=\;$ [\thesection.\thesubsection] \ #1}  
+\nopagebreak
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% temporary
+
+%\renewcommand{\includegraphics}[2][]{\ \\ \ {\color{blue} FIGURE:} \ \\ \ }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document} 
+
+\title{email documentation}
+
+\author{IW, DC}
+
+%\affiliation{Department of Physics, Ben-Gurion University, Beer-Sheva 84105, Israel}
+
+\begin{abstract}
+\end{abstract}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sect{13/02/14}
+Our purpose is to develop a theory for conductance in glassy mesoscopic systems
+
+\sect{16/02/14 17:06}
+A way to generate a random sequence with
+a "statistically exact" box distribution
+is to generate a random permutation of $N$ numbers:
+
+z = (eta/N) * randperm(N);
+
+http://www.mathworks.com/help/matlab/ref/randperm.html
+
+This has some advantage because "rare" non-typical
+sequences are avoided. In the case of log-box
+distribution this is a *crucial* issue, because
+the tails of the distribution dominate the result.
+
+
+\sect{27/02/14 12:58}
+I am very curious to know whether the $g_{alpha}$ of Thouless
+is correlated with the $q_{alpha}$. Please try to get it
+into your analysis.
+
+For the calculation of the Thouless curvature you
+add a hopping term $c0*exp(i phi)$ between the first
+and the last site. Then you diagonalize for $phi=0$
+and for some very small but finite $phi=epsilon$,
+and deduce the curvature from
+
+E(phi) = (1/2)Curvature * phi^2
+
+Better to make a plot of $E(phi)$ for a typical
+eigenstate / realization to see that the numerics
+is "stable". Another possibility is to calculate
+the curvature from 2nd order perturbation theory.
+
+
+
+\sect{16/02/14 17:06}
+
+
+
+\sect{16/02/14 17:06}
+
+
+
+
+
+
+\sect{16/02/14 17:06}
+
+
+\end{document}
+
+

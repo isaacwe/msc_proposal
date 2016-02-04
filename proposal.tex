@@ -1,0 +1,379 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  notes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[onecolumn,fleqn,notitlepage,secnumarabic]{revtex4}
+
+% special 
+\usepackage{ifthen}
+\usepackage{ifpdf}
+\usepackage{float}
+\usepackage{color}
+
+% fonts
+\usepackage{latexsym}
+\usepackage{amsmath} 
+\usepackage{amssymb} 
+\usepackage{bm}
+\usepackage{wasysym}
+
+
+\ifpdf
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\else
+\usepackage{graphicx}
+\usepackage{epsfig}
+\fi
+
+% packages added by jarondl
+
+\usepackage{verbatim} % for multiline comments
+\usepackage{natbib} % change the bibliography style 
+\usepackage{fancybox} % allows putting boxes with borders
+\usepackage{cmap}  % for making pdf mathmode searchable
+\usepackage[pdftitle={proposal}]{hyperref}  % for hyperlinks in biblio. should be called last?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% math symbols I
+\newcommand{\sinc}{\mbox{sinc}}
+\newcommand{\const}{\mbox{const}}
+\newcommand{\trc}{\mbox{trace}}
+\newcommand{\intt}{\int\!\!\!\!\int }
+\newcommand{\ointt}{\int\!\!\!\!\int\!\!\!\!\!\circ\ }
+\newcommand{\ar}{\mathsf r}
+\newcommand{\im}{\mbox{Im}}
+\newcommand{\re}{\mbox{Re}}
+
+% math symbols II
+\newcommand{\eexp}{\mbox{e}^}
+\newcommand{\bra}{\left\langle}
+\newcommand{\ket}{\right\rangle}
+
+% Mass symbol
+\newcommand{\mass}{\mathsf{m}} 
+\newcommand{\rdisc}{\epsilon} 
+
+% more math commands
+\newcommand{\tbox}[1]{\mbox{\tiny #1}}
+\newcommand{\bmsf}[1]{\bm{\mathsf{#1}}} 
+\newcommand{\amatrix}[1]{\begin{matrix} #1 \end{matrix}} 
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+
+% equations
+\newcommand{\be}[1]{\begin{eqnarray}\ifthenelse{#1=-1}{\nonumber}{\ifthenelse{#1=0}{}{\label{e#1}}}}
+\newcommand{\ee}{\end{eqnarray}} 
+\newcommand{\beq}{\be{1}}
+\newcommand{\eeq}{\ee} 
+
+% arrangement
+\newcommand{\hide}[1]{}
+\newcommand{\drawline}{\begin{picture}(500,1)\line(1,0){500}\end{picture}}
+\newcommand{\bitem}{$\bullet$ \ \ \ }
+\newcommand{\Cn}[1]{\begin{center} #1 \end{center}}
+\newcommand{\mpg}[2][1.0\hsize]{\begin{minipage}[b]{#1}{#2}\end{minipage}}
+\newcommand{\mpgt}[2][1.0\hsize]{\begin{minipage}[t]{#1}{#2}\end{minipage}}
+\newcommand{\sect}[1]{{\bf #1.-- }}
+
+
+
+%fminipage using fancybox package
+\newenvironment{fminipage}%
+  {\begin{Sbox}\begin{minipage}}%
+  {\end{minipage}\end{Sbox}\fbox{\TheSbox}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Page setup
+\setlength{\parindent}{0cm} 
+\setlength{\parskip}{0.3cm} 
+
+%%% Sections. The original revtex goes like this:
+%\def\section{%
+%  \@startsection
+%    {section}%
+%    {1}%
+%    {\z@}%
+%    {0.8cm \@plus1ex \@minus .2ex}%
+%    {0.5cm}%
+%    {\normalfont\small\bfseries}%
+%}%
+%\def{ \bf %
+%  \@startsection
+%    {subsection}%
+%    {2}%
+%    {\z@}%
+%    {.8cm \@plus1ex \@minus .2ex}%
+%    {.5cm}%
+%    {\normalfont\small\bfseries}%
+%}%
+%%%%%%% And our version goes like this:
+\makeatletter
+\def\section{%
+  \@startsection
+    {section}%
+    {1}%
+    {\z@}%
+    {0.8cm \@plus1ex \@minus .2ex}%
+    {0.5cm}%
+    {\Large\bf }%
+}%
+\def\subsection{%
+  \@startsection
+    {subsection}%
+    {2}%
+    {\z@}%
+    {.8cm \@plus1ex \@minus .2ex}%
+    {.5cm}%
+    {\normalfont\small\bfseries}%
+}%
+%%%%%%%%%%  Here we deal with capitalization. The original revtex first, and then our version.
+%\def\@hangfrom@section#1#2#3{\@hangfrom{#1#2}\MakeTextUppercase{#3}}%
+%\def\@hangfroms@section#1#2{#1\MakeTextUppercase{#2}}%
+\def\@hangfrom@section#1#2#3{\@hangfrom{#1#2}{#3}}%
+\def\@hangfroms@section#1#2{#1{#2}}%
+\makeatother
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Heat transport in low-dimensional random harmonic networks}
+
+
+\author{ Isaac Weinberg\\Adviser: Doron Cohen }
+\affiliation{Physics Department, Ben Gurion University of the Negev}
+\date{\today}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}
+
+The theory of phononic heat conduction in disordered low-dimensional networks is a central theme of research in recent years \cite{LLP03,
+D08,LRWZHL12}. The interest in this theme is not only purely academic, but it is also motivated by the ongoing developments in nanotechnology.
+In spite of the recent research efforts, the understanding of thermal transport is still at its infancy. This becomes more obvious if one compares 
+with the achievements that have been experienced during the last fifty years in understanding and managing electron transport. In this respect 
+even the microscopic laws that govern heat conduction in low dimensional systems have only recently start being scrutinized via both theoretical, 
+numerical and experimental studies \cite{LLP03,D08,COGMZ08,NGPB09,LRWZHL12,ZL10,K1,K2}. These studies unveil many surprising results, the most 
+dramatic of which is the violation of the naive expectation (Fourier's law) which states that the thermal conductance $G$ is inverse proportional 
+to the size~$L$ of the system, namely, $G\propto 1/L^{\alpha}$ with ${\alpha=1}$. 
+
+Currently it is well established that in low-dimensional disordered systems, in the absence of non-linearity, Fourier's law  is violated. The
+underlying physics is related to the theory of Anderson localization of the vibrational modes \cite{D08,D01,LXXZL12,DL08,LD05,RD08,LZH01,
+KCRDLS10a,KCRDLS10b}. On the basis of the prevailing theory \cite{D08,D01} it has been claimed that for samples with ``optimal" contacts ${\alpha=1/2}$, 
+while in general $\alpha$ might be larger, say ${\alpha=3/2}$ for samples with ``fixed boundary conditions". Recently the ``optimal" value 
+${\alpha=1/2}$ has been challenged by the numerical study of \cite{BZFK13}. These authors found a super-optimal value ${\alpha \sim 1/4}$ for 
+moderate system sizes $L$, while asymptotically, in the presence of a pinning potential, $G$ decays exponentially as ${\exp(-\gamma L)}$. 
+
+
+%%%%%%%
+
+It is obvious that if the final goal 
+is to achieve the control of heat flow on the nanoscale, 
+first we have to understand the fundamental mechanisms of heat conduction, 
+and provide an adequate description of its scaling with the system size for any~$L$, 
+including the experimentally relevant cases of intermediate lengths.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sect{The model}
+%
+We consider a one-dimensional network of $L$ harmonic oscillators of equal masses. 
+The system is described by the Hamiltonian 
+% 
+\begin{equation}
+{\cal H} = {1\over 2} P^T P + {1\over 2} Q^T \bm{W} Q 
+\label{Hmatrix} 
+\end{equation}
+%
+where $Q^T\equiv(q_1,q_2,\cdots,q_N)$, and $P^T\equiv(p_1,p_2,\cdots,p_N)$ 
+are the displacement coordinates and the conjugate momenta. 
+The real symmetric matrix  $\bm{W}$ is determined by the spring constants.
+Its off-diagonal elements $W_{nm}{=}-w_{nm}$ originate from 
+the coupling potential $(1/2)\sum_{m,n}w_{nm}(q_n-q_m)^2$, 
+while its diagonal elements contain an additional 
+optional term that originate from a pinning potential ${(1/2)\sum_n v_n q_n^2}$ 
+that couples the masses to the substrate. 
+Accordingly ${W_{nn}=v_n+\sum_m w_{nm}}$. 
+For a chain with near-neighbor transitions we use 
+the simplified notation ${w_{n{+}1,n} \equiv w_n}$.  
+
+
+In general the interest is in quasi one-dimensional networks, 
+for which $\bm{W}$ is a banded matrix with ${1{+}2b}$ diagonals. 
+The heat conduction of such networks has been investigated numerically 
+in \cite{BZFK13}, with puzzling findings that have not been explained 
+theoretically. We shall see that the essential physics can be 
+reduced to single channel ($b=1$) analysis. On top we would like  
+to consider not only weakly disordered network, but also 
+the implications of ``glassy" disorder as defined below.   
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sect{The disorder}
+%
+Both the $w_{nm}$ and the $v_n$ are assumed to 
+be random variables. The diagonal-disorder due to the pinning
+potential is formally like that of the standard Anderson model 
+with some variance ${\mbox{Var}(v)=\sigma_{\parallel}^2}$.    
+The off-diagonal disorder of the couplings might be 
+weak with some variance ${\mbox{Var}(w) \equiv \sigma_{\perp}^2}$, 
+but more generally it can reflect the glassiness of the network. 
+%
+By ``glassy disorder" we mean that the coupling~$w$ has an 
+exponential sensitivity to physical parameters.  
+For ``random barrier" statistics ${ w \propto \eexp{-B} }$, 
+where $B$ is uniformly distributed within $[0,\sigma]$. 
+For ``random distances" statistics ${ w \propto \eexp{-R} }$,
+where $R$ is implied by Poisson statistics. 
+The probability distribution in the latter case is 
+%
+\beq
+P(w) \ \ = \ \ \frac{s}{w_c^{s}} w^{s-1} \ (w<w_c)
+\eeq
+%
+where~$s$ is the normalized density of the sites.
+Large $s$ is like regular weak disorder, while small $s$ 
+implies glassy disorder that features log-wide distribution  
+(couplings distributed over several orders of magnitude). 
+The case $s=0$ with an added lower cutoff 
+formally corresponds to ``random barriers". 
+
+
+
+%%%%%%%%%%%%%%%%%%%
+\section{Work plan}
+
+{ \bf Evolving energy distribution.-- } The first step is to obtain a secular equation for the eigenenergys and to derive analytic expressions for $p$ and $\psi_n$. 
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminary results} \label{sec:prelim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{99}
+
+\bibitem{LLP03} 
+S. Lepri, R. Livi, \& A. Politi, 
+%{\em Thermal conduction in classical low-dimensional lattices},
+Phys. Rep. {\bf 377}, 1 (2003).
+
+\bibitem{D08} 
+A. Dhar, 
+%{\em Heat transport in low-dimensional systems}, 
+Adv. Phys. {\bf 57}, 457 (2008).
+
+\bibitem{LRWZHL12} 
+N. Li, J. Ren, L. Wang, G. Zhang, P. H\"anggi, and B. Li, 
+%{\em Colloquium: Phononics: Manipulating heat flow with electronic analogs and beyond}, 
+Rev. Mod. Phys. \textbf{84}, 1045 (2012).
+
+
+\bibitem{COGMZ08}
+C.W. Chang, D. Okawa, H. Garcia, A. Majumdar,  A. Zettl, 
+%{\em Breakdown of Fourier’s Law in Nanotube Thermal Conductors}, 
+Phys. Rev. Lett, {\bf 101}, 075903 (2008).
+
+\bibitem{NGPB09} 
+D.L. Nika, S. Ghosh, E. P. Pokatilov, and A. A. Balandin, 
+% {\em Lattice thermal conductivity of graphene flakes: Comparison with bulk graphite}, 
+Appl. Phys. Lett. {\bf 94}, 203103 (2009).
+
+
+\bibitem{ZL10} 
+G. Zhang, B. Li,
+% {\em Impacts of Doping On Thermal and Thermoelectric Properties of Nan-Materials"},  
+NanoScale {\bf 2}, 1058 (2010).
+
+\bibitem{K1} 
+H. Li, T. Kottos, B. Shapiro, 
+% Thermal transport in phononic Cayley-tree networks
+Phys. Rev. E  91, 042125 (2015).
+
+\bibitem{K2} 
+M. Schmidt, T. Kottos, B. Shapiro,
+% Random-matrix-theory approach to mesoscopic fluctuations of heat current
+Phys. Rev. E  88, 022126 (2013).
+
+\bibitem{D01}
+A. Dhar, 
+% {\em Heat Conduction in the Disordered Harmonic Chain Revisited}, 
+Phys. Rev. Lett. {\bf 86}, 5882 (2001).
+
+\bibitem{LXXZL12} 
+S. Liu, X. Xu, R. Xie, G. Zhang, B. Li, 
+% Anomalous Heat Conduction and Anomalous Diffusion in Low Dimensional Nanoscale Systems
+Euro. Phys. J. B 85, 337 (2012).
+% arXiv:1205.3065v2 [cond-mat.stat-mech] (2012).
+
+\bibitem{DL08} 
+A. Dhar, J.L. Lebowitz, 
+Phys. Rev. Lett. {\bf 100}, 134301 (2008).
+
+\bibitem{LD05} 
+L. W. Lee, A. Dhar, 
+Phys. Rev. Lett. {\bf 95}, 094302 (2005).
+
+\bibitem{RD08} 
+D. Roy, A. Dhar, 
+Phys. Rev. E {\bf 78}, 051112 (2008).
+
+\bibitem{LZH01} 
+B. Li, H. Zhao, B. Hu, 
+Phys. Rev. Lett. {\bf 86}, 63 (2001).
+
+\bibitem{KCRDLS10a}
+A. Kundu, A. Chaudhuri, D. Roy, A. Dhar, J.L. Lebowitz, H. Spohn,
+Europhys. Lett. {\bf 90}, 40001 (2010).
+
+\bibitem{KCRDLS10b}
+A. Chaudhuri, A. Kundu, D. Roy, A. Dhar, J.L. Lebowitz, H. Spohn,
+% Heat transport and phonon localization in mass-disordered harmonic crystals
+Phys. Rev. B {\bf 81}, 064301 (2010).
+
+\bibitem{BZFK13}
+J.D. Bodyfelt, M. C. Zheng, R. Fleischmann, T. Kottos, 
+Phys. Rev. E {\bf 87}, 020101(R) (2013)
+
+\bibitem{DG84}
+B. Derrida and E. Gardner, 
+J. Physique {\bf 45}, 1283 (1984). 
+
+\bibitem{Abrikosov}
+A.A. Abrikosov, 
+% The paradox with the static conductivity of a one-dimensional metal,
+Solid State Communications {\bf 37}, 997 (1981)
+
+\bibitem{Shapiro}
+B. Shapiro, 
+%Probability distributions in the scaling theory of localization
+Phys. Rev. B 34, R4394 (1986)
+%http://journals.aps.org/prb/abstract/10.1103/PhysRevB.34.4394
+
+
+\bibitem{Izrailev}
+F.M. Izrailev, A.A. Krokhin, N.M. Makarov,
+%Anomalous localization in low-dimensional systems with correlated disorder
+Physics Reports 512, 125 (2012).
+% http://www.sciencedirect.com/science/article/pii/S0370157311002936
+
+\bibitem{dubi}
+Y. Dubi, M. Di Ventra,
+%Fourier’s law: Insight from a simple derivation
+Phys. Rev. E 79, 042101 (2009).
+% http://journals.aps.org/pre/abstract/10.1103/PhysRevE.79.042101
+
+\bibitem[a]{rmrkA}
+Given an eigenstate $\psi$ we define $p_n=|\psi_n|^2$.
+The normalization is such that $\sum p_n=1$. 
+The participation number PN$=[\sum p_n^2]^{-1}$ 
+is a measure for the number of sites that are occupied 
+by the eigenstate.
+
+\end{thebibliography}
+
+\end{document}
+
