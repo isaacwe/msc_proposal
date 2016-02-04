@@ -208,7 +208,7 @@ In general the interest is in quasi one-dimensional networks,
 for which $\bm{W}$ is a banded matrix with ${1{+}2b}$ diagonals. 
 The heat conduction of such networks has been investigated numerically 
 in \cite{BZFK13}, with puzzling findings that have not been explained 
-theoretically. We shall see that the essential physics can be 
+theoretically. From previous work we have seen that the essential physics can be 
 reduced to single channel ($b=1$) analysis. On top we would like  
 to consider not only weakly disordered network, but also 
 the implications of ``glassy" disorder as defined below.   
@@ -244,12 +244,53 @@ implies glassy disorder that features log-wide distribution
 The case $s=0$ with an added lower cutoff 
 formally corresponds to ``random barriers". 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sect{Localization}
+%
+The disorder significantly affects the eigenmodes: rather than being extended 
+as assumed by Debye, they become exponentially localized. 
+We use the standard notation $\gamma(\omega)$ for the inverse localization length: 
+%
+\beq
+\label{locdef}
+\gamma(\omega) \ \ = \ \ -\lim_{L\rightarrow \infty}{1\over 2}{\langle \ln(g) \rangle_{\omega} \over L}
+\eeq
+%
+where $\langle\cdots\rangle$ indicates an averaging over disorder realizations, 
+and~$g$ is the transmission. The notion of transmission is physically appealing here,  
+because we can regard~$\bm{W}$ as the Hamiltonian of an electron in a tight binding model. 
+The transmission can be calculated from the transfer matrix $\bm{T}$ of the sample:
+%
+\beq
+\label{gTMM}
+g \ \ = \ \ \frac{4|\sin(k)|^2}{|T_{21}-T_{12}+T_{22}\exp(ik)-T_{11}\exp(-ik)|^2}
+\eeq
+%
+where for a single channel ($b=1$) network
+%
+\be{5}
+\bm{T} \ \ = \ \ \prod_{n=1}^{n=L} 
+\left(\amatrix{
+\frac{\lambda-(v_n + w_{n}+w_{n+1})}{w_{n+1}} & -\frac{w_{n}}{w_{n+1}} \cr 1 & 0 
+}\right)
+\eeq
+%
+Above it is assumed that the sample is attached to two non-disordered leads.
+Optimal coupling requires the hopping-rates there to be all equal 
+to the ``conductivity"~$w_0$, meaning same speed of sound. 
+
 
 
 %%%%%%%%%%%%%%%%%%%
 \section{Work plan}
 
-{ \bf Evolving energy distribution.-- } The first step is to obtain a secular equation for the eigenenergys and to derive analytic expressions for $p$ and $\psi_n$. 
+{ \bf One parameter scaling for conservative model.-- } We would like to investigate whether one parameter scaling is present in conservative model. In Anderson model all states are localized as opposed to the conservative model which have a single extended state ($k=0$). We would like to know if states near the extended state scaled the same as localized one.
+
+{ \bf Inverse localization length ($\gamma$).-- } We would like to have a theoretical estimate for $\gamma$ both for weak, and ``glassy'' disorder. these estimate will later be used for heat conductance calculation.
+
+{ \bf Heat conductance for intermediate system size.-- } We would like to have a theoretical explanation for the super-optimal value $\alpha \sim 1/4$ numerically presented in \cite{BZFK13}.
+
+
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Preliminary results} \label{sec:prelim}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
