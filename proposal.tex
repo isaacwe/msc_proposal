@@ -4,6 +4,18 @@
 
 \documentclass[onecolumn,fleqn,notitlepage,secnumarabic]{revtex4}
 
+% Text arrangement
+
+\newcommand{\rmrk}[1]{\textcolor{red}{#1}}
+\newcommand{\Eq}[1]{\textcolor{blue}{Eq.\!\!~(\ref{#1})}} 
+\newcommand{\Fig}[1]{\textcolor{blue}{Fig.}\!\!~\ref{#1}}
+\newcommand{\drawline}{\begin{picture}(500,1)\line(1,0){500}\end{picture}}
+\newcommand{\bitem}{$\bullet$ \ \ \ }
+\newcommand{\Cn}[1]{\begin{center} #1 \end{center}}
+\newcommand{\mpg}[2][1.0\hsize]{\begin{'}[b]{#1}{#2}\end{'}}
+\newcommand{\mpgt}[2][1.0\hsize]{\begin{'}[t]{#1}{#2}\end{'}}
+
+
 % special 
 \usepackage{ifthen}
 \usepackage{ifpdf}
@@ -70,11 +82,6 @@
 
 % arrangement
 \newcommand{\hide}[1]{}
-\newcommand{\drawline}{\begin{picture}(500,1)\line(1,0){500}\end{picture}}
-\newcommand{\bitem}{$\bullet$ \ \ \ }
-\newcommand{\Cn}[1]{\begin{center} #1 \end{center}}
-\newcommand{\mpg}[2][1.0\hsize]{\begin{minipage}[b]{#1}{#2}\end{minipage}}
-\newcommand{\mpgt}[2][1.0\hsize]{\begin{minipage}[t]{#1}{#2}\end{minipage}}
 \newcommand{\sect}[1]{{\bf #1.-- }}
 
 
@@ -136,6 +143,9 @@
 \def\@hangfrom@section#1#2#3{\@hangfrom{#1#2}{#3}}%
 \def\@hangfroms@section#1#2{#1{#2}}%
 \makeatother
+
+
+\graphicspath{{./Figs/}{./}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -252,7 +262,7 @@ as assumed by Debye, they become exponentially localized.
 We use the standard notation $\gamma(\omega)$ for the inverse localization length: 
 %
 \beq
-\label{locdef}
+\label{eq:locdef}
 \gamma(\omega) \ \ = \ \ -\lim_{L\rightarrow \infty}{1\over 2}{\langle \ln(g) \rangle_{\omega} \over L}
 \eeq
 %
@@ -262,13 +272,13 @@ because we can regard~$\bm{W}$ as the Hamiltonian of an electron in a tight bind
 The transmission can be calculated from the transfer matrix $\bm{T}$ of the sample:
 %
 \beq
-\label{gTMM}
+\label{eq:gTMM}
 g \ \ = \ \ \frac{4|\sin(k)|^2}{|T_{21}-T_{12}+T_{22}\exp(ik)-T_{11}\exp(-ik)|^2}
 \eeq
 %
 where for a single channel ($b=1$) network
 %
-\be{5}
+\be{5}\label{eq:TM}
 \bm{T} \ \ = \ \ \prod_{n=1}^{n=L} 
 \left(\amatrix{
 \frac{\lambda-(v_n + w_{n}+w_{n+1})}{w_{n+1}} & -\frac{w_{n}}{w_{n+1}} \cr 1 & 0 
@@ -284,16 +294,229 @@ to the ``conductivity"~$w_0$, meaning same speed of sound.
 %%%%%%%%%%%%%%%%%%%
 \section{Work plan}
 
-{ \bf One parameter scaling for conservative model.-- } We would like to investigate whether one parameter scaling is present in conservative model. In Anderson model all states are localized as opposed to the conservative model which have a single extended state ($k=0$). We would like to know if states near the extended state scaled the same as localized one.
+\sect{Scaling near the extended state ($k=0$)} 
+As opposed to Anderson model were all states are localized, conservative model have a single extended state ($k=0$). We would like to know if states near the extended state scaled the same as localized one.
 
-{ \bf Inverse localization length ($\gamma$).-- } We would like to have a theoretical estimate for $\gamma$ both for weak, and ``glassy'' disorder. these estimate will later be used for heat conductance calculation.
+\sect{Inverse localization length ($\gamma$)}
+We would like to have a theoretical estimate for the dependence of $\gamma$ on the vibration frequency $\omega$,  both for weak, and ``glassy'' disorder. These estimate are will later be used for heat conductance calculation ($G$).
 
-{ \bf Heat conductance for intermediate system size.-- } We would like to have a theoretical explanation for the super-optimal value $\alpha \sim 1/4$ numerically presented in \cite{BZFK13}.
+\sect{Heat conductance for intermediate system size}
+We would like to have a theoretical explanation for the super-optimal value $\alpha \sim 1/4$ numerically presented in \cite{BZFK13}.
 
+\sect{Lifshitz-tail regime} In our work on the inverse localization length we have deduce a duality between strong (glassy) off-diagonal disorder and weak diagonal disorder. We would like to investigate the implication of the
+Lifshitz-tail regime in the standard Anderson model on strong off-diagonal (conservative) disorder.
 
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Preliminary results} \label{sec:prelim}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Scaling near the extended state ($k=0$)}
+
+We define the inverse localization through the asymptotic relation \Eq{eq:locdef}. We have used the transfer matrix method \Eq{eq:TM} and \Eq{eq:gTMM} for different $k$'s, as can be seen in \Fig{fig:lyp}, in order to find $\gamma(k)$:
+
+\begin{figure}[h]\label{fig:lyp}
+\includegraphics[width=18cm]{gamma_N2.png}
+\caption{\footnotesize Asymptotic relation for different $k$s from which $\gamma$ is extracted}
+\end{figure}
+
+\subsection{Inverse localization length ($\gamma$)}
+%
+In the absence of disorder $\bm{W}$ describes hopping 
+with some rate $w_0$, and the eigenstates are free waves labeled by~$k$. 
+With disorder the~$w_0$ of the unperturbed Hamiltonian is 
+loosely defined as the average~$w$. Later we shall go beyond 
+the Born approximation and will show that it should 
+be the harmonic average (as already defined previously).   
+%
+The disorder couples states that have different~$k$. 
+For diagonal disorder ("pinning") the couplings are proportional to the 
+variance of the diagonal elements, 
+namely ${ \overline{|W_{k,k'}|^2} = (1/L)\text{Var}(v)}$.
+%
+For off-diagonal disorder (random spring constants) 
+the  couplings are proportional to the variance  of 
+the off-diagonal elements, and depends on~$b$ and on~$k$ too:
+%
+\beq
+\overline{\left|W_{k',k}\right|^2}  =  \frac{\text{Var}(w)}{L} \ \sum_{r=1}^{b} \left[2\sin(rk'/2) \, 2\sin(rk/2)\right]^2 
+\eeq
+%
+It follow that for small~$k$ we have ${|W_{k,k'}|^2 \propto b^5 \sigma_{\perp}^2 k^4}$. 
+
+
+The Fermi-Golden-Rule (FGR) picture implies that 
+the scattering rate is ${\tau^{-1}= 2\pi \varrho(\omega) \overline{\left|W_{k',k}\right|^2}}$. 
+%
+The Born approximation for the mean free path is ${\ell=[d\lambda/dk]\tau}$, 
+where the expression in the square brackets is the group velocity 
+in the electronic sense ($\lambda$ is like energy). 
+The Debye approximation implies $d\lambda/dk \approx 2[c^2]k$.
+% 
+The inverse localization length is $\gamma=(2\ell)^{-1}$. 
+From here (without taking the small $k$ approximation) it follows that 
+%
+\beq \label{FGRv}
+\gamma(\omega) \ \ &\approx& \ \ 
+\frac{1}{8}\left[\frac{9}{b^6}\right]\left(\frac{\sigma_{\parallel}}{w_0}\right)^2  \left(\frac{1}{\sin(k)}\right)^2
+\\ \label{FGRw} &+& \ \ 
+\frac{1}{8}\left[\frac{9}{5b}\right]\left(\frac{\sigma_{\perp}}{w_0}\right)^2  \left( 2\tan\left(\frac{k}{2}\right) \right)^2
+\eeq
+%
+where the prefactors in the square brackets assume ${b\gg1}$, and should be replaced by unity for ${b=1}$.
+In the absence of pinning the localization length diverges ($\gamma \propto k^2$) 
+at the band floor, as assumed by Debye. This behavior is demonstrated in \Fig{f2} 
+for two types of glassy disorder. The deviations from \Eq{FGRw} 
+will be explained in the next paragraphs. 
+
+
+
+
+% gamma vs $k$, box disorder
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+
+\includegraphics[width=4cm]{gammaVSkBX}
+\includegraphics[width=4cm]{gammaVSkPL}
+
+\caption{The inverse localization length $\gamma$ versus $k$ 
+for logbox distributed rates with $\sigma=10$ (a);   
+and for powerlaw distributed rated with $s=4$ (b).  
+Pure off-diagonal disorder is assumed.
+The numerical results here and in the next figure 
+are based on the transfer matrix method (symbols), 
+with several hundreds of realizations up to ${L\sim10^4}$.
+They are compared to the naive Born expectation \Eq{FGRw} (solid blue line).
+In panel (b) the upper dashed red line is based on our improved 
+estimate for ``glassy disorder"  \Eq{e12}, 
+while in (a) it coincides with the naive estimate (hence not indicated). 
+The inverse localization length $\gamma$ is over-estimated 
+as $k$ becomes larger due to the Lifshitz tail anomaly (see text).  
+}
+\label{f2}
+\end{figure}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+The Born approximation has assumed weak disorder. 
+Here we would like to consider the more general case 
+of glassy disorder. For this purpose we write 
+the equation ${\bm{W}\psi = \lambda \psi}$ for the eigenstates 
+as a map of a single variable ${r_n=\psi_{n}/\psi_{n-1}}$,   
+namely  ${r_{n+1} = -R_n/r_n - A_n}$,  
+where ${R_n=w_{n-1}/w_{n}}$, and ${A_n = (\lambda-v_n-w_n-w_{n-1})/w_n}$.
+In the case of diagonal disorder it takes the from  
+%
+\be{8}
+r_{n+1} \ = \ -\frac{1}{r_n} - \epsilon + f_n
+\eeq
+%
+where $f_n=v_n/w_0$ is the scaled disorder 
+and $\epsilon=(\lambda/w_0){-}2 \equiv 2\cos(k)$ 
+is the scaled energy 
+measured from the center of the band.
+%
+Without the random term $f_n$ this map has a fixed-point 
+that is determined by the equation ${ r^2+\epsilon r +1=0 }$, 
+with elliptic solution for ${\epsilon\in[-2,2]}$. 
+The random term is responsible for having 
+a non zero inverse localization length.
+The Born approximation \Eq{FGRv} is written as  
+%
+\be{9}
+\gamma \ \ = \ \ -\langle \ln(r) \rangle \ \ \approx \ \ \frac{1}{8} \, \frac{ \mbox{Var}(f)}{\left[1-(\epsilon/2)^2\right]}
+\eeq
+% 
+This standard estimate does not hold close to the band-edge $\epsilon_0{=}{-}2$. 
+The energy scale that controls the so-called Lifshitz tail region 
+is $\epsilon_c = [\mbox{Var}(f)]^{2/3}$.
+In the region $|\epsilon-\epsilon_0|<\epsilon_c$ the inverse localization 
+length has finite value $\gamma \sim \sqrt{\epsilon_c}$.
+This observation has no dramatic consequences at this stage 
+since we assume a weak pinning potential. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+We now turn to consider the glassy disorder due to the dispersion of the $w_n$. 
+Here we cannot trust the Born approximation because a small parameter is absent. 
+However, without any approximation we can write the map in the form 
+%
+\be{10}
+r_{n+1} \ \ = \ \ R_n \left( 1 - \frac{1}{r_n}\right) + 1 -\frac{\lambda}{w_n} 
+\eeq
+%
+For $\lambda{=}0$ the zero momentum state is a solution as expected, 
+irrespective of the disorder: the randomness in $R_n$ is not effective 
+in destroying the ${r=1}$ fixed point. Therefore, for small $\lambda$, 
+we can set without much error ${R_n=1}$. The formal argument that justifies 
+this approximation is based on the linearization ${(r_{n+1}-1)=R_n(r_n-1)}$, 
+and the observation that the product ${R_1R_2R_3...}$ remains of order unity. 
+On the basis of this insight \Eq{e10} reduces to \Eq{e8} with the identifications 
+%
+\beq
+\epsilon = -2 + \frac{\lambda}{w_0}, 
+\ \ \ \ \ f_n = -\lambda \left(\frac{1}{w_n}-\frac{1}{w_0} \right)
+\eeq 
+%
+The expression for~$\epsilon$ justifies the identification of the harmonic average $w_0$ 
+as the effective coupling. Furthermore, we observe that there is an {\em emergent} small parameter, 
+namely, the dispersion of~$f$, which is proportional to $\lambda$ irrespective of the glassiness. 
+Thus we have deduced a {\em duality} between ``strong" glassy disorder and ``weak" diagonal disorder.
+%
+In the context of the dual problem we can use with confidence the Born approximation \Eq{e9}, leading to  
+%
+\be{12}
+\gamma \ \ \approx \ \ \frac{1}{8} w_0^2 \, \mbox{Var}\left(\frac{1}{w}\right)  
+\, \frac{4\left(\frac{\lambda}{2w_0}\right)}{2-\left(\frac{\lambda}{2w_0}\right)}
+\eeq
+% 
+This would coincide with the primitive Born approximation \Eq{FGRw} 
+if we could replace the harmonic averages by algebraic averages, namely,  
+%
+\beq
+\frac{\mbox{Var}(1/w)}{\langle 1/w \rangle^2} 
+\ \ \mapsto \ \ 
+\frac{\mbox{Var}(w)}{\langle w \rangle^2} 
+\eeq 
+%
+For log-box distribution the two types of averages provide exactly the same result, but for 
+power-law disorder the two prescriptions differ enormously. This is demonstrate in \Fig{f2}, 
+were we present our numerical results together with the theoretical predictions. 
+%
+Irrespective of that, the inverse localization length $\gamma$ is over-estimated as $k$ becomes larger. 
+We can trace the origin of this discrepancy to the Lifshitz anomaly in the Anderson model.
+The condition ${|\epsilon-\epsilon_0|<\epsilon_c}$ translates into ${\lambda > w_0^{-3}[\mbox{Var}(1/w)]^{-2}}$.
+Thus the anomaly develops not at the band floor but as we go up in~$\omega$, 
+where the inverse localization length becomes $\gamma \propto \omega^{4/3}$ 
+instead of $\gamma \propto \omega^2$. 
+
+
+
+% var[ln(g)] and ln<g> vs <ln(g)>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}
+
+\includegraphics[clip,width=4cm]{varVSavg}
+\includegraphics[clip,width=4cm]{avgVSavg}
+
+\caption{ \footnotesize 
+Testing one parameter scaling for glassy disorder. 
+The variance of $\ln(g)$ (left panel) and the log of the average $-\ln\langle g \rangle$ (right panel)
+are plotted against the scaling parameter $-\langle \ln(g) \rangle$. 
+The calculation is done for powerlaw distributed rates 
+with ${s=15}$ (blue diamonds) and ${s=1.2}$ (red squares).
+The solid line is the standard one parameter scaling prediction for weak disorder, 
+and the dashed line is its asymptotic approximation. 
+One observes that an anomaly develops as the disorder becomes glassy.}
+
+\label{f3}
+\end{figure}
+
 
 \begin{thebibliography}{99}
 
