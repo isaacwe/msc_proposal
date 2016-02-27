@@ -9,6 +9,7 @@
 \newcommand{\rmrk}[1]{\textcolor{red}{#1}}
 \newcommand{\Eq}[1]{\textcolor{blue}{Eq.\!\!~(\ref{#1})}} 
 \newcommand{\Fig}[1]{\textcolor{blue}{Fig.}\!\!~\ref{#1}}
+\newcommand{\Sec}[1]{\textcolor{blue}{Sec.\!\!~\ref{#1}}} 
 \newcommand{\drawline}{\begin{picture}(500,1)\line(1,0){500}\end{picture}}
 \newcommand{\bitem}{$\bullet$ \ \ \ }
 \newcommand{\Cn}[1]{\begin{center} #1 \end{center}}
@@ -294,38 +295,46 @@ to the ``conductivity"~$w_0$, meaning same speed of sound.
 %%%%%%%%%%%%%%%%%%%
 \section{Work plan}
 
-\sect{Scaling near the extended state ($k=0$)} 
-As opposed to Anderson model were all states are localized, conservative model have a single extended state ($k=0$). We would like to know if states near the extended state scaled the same as localized one.
+\sect{One parameter scaling for glassy disorder}
+We wish to investigate whether One parameter scaling holds when the disorder become glassy. See \Fig{fig:scaling}
 
 \sect{Inverse localization length ($\gamma$)}
-We would like to have a theoretical estimate for the dependence of $\gamma$ on the vibration frequency $\omega$,  both for weak, and ``glassy'' disorder. These estimate are will later be used for heat conductance calculation ($G$).
+We would like to have a theoretical estimate for the dependence of $\gamma$ on the vibration frequency $\omega$,  both for weak, and ``glassy'' disorder. These estimate will later be used for heat conductance calculation ($G$).
+
+\sect{The average transmission} We would like to go beyond the common approximation ${ \langle g \rangle \approx \eexp{-(1/2)\gamma L}}$ which in-fact can be trusted 
+only for very long samples, in order to achieve our next goal.
 
 \sect{Heat conductance for intermediate system size}
 We would like to have a theoretical explanation for the super-optimal value $\alpha \sim 1/4$ numerically presented in \cite{BZFK13}.
 
 \sect{Lifshitz-tail regime} In our work on the inverse localization length we have deduce a duality between strong (glassy) off-diagonal disorder and weak diagonal disorder. We would like to investigate the implication of the
 Lifshitz-tail regime in the standard Anderson model on strong off-diagonal (conservative) disorder.
-
+\newpage
 %%%%%%%%%%%%%%%%%%%%%%%
 \section{Preliminary results} \label{sec:prelim}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Scaling near the extended state ($k=0$)}
+\begin{figure}[h]
 
-We define the inverse localization through the asymptotic relation \Eq{eq:locdef}. We have used the transfer matrix method \Eq{eq:TM} and \Eq{eq:gTMM} for different $k$'s, as can be seen in \Fig{fig:lyp}, in order to find $\gamma(k)$:
+\includegraphics[clip,width=6cm]{varVSavg}
+\includegraphics[clip,width=6cm]{avgVSavg}
 
-\begin{figure}[h]\label{fig:lyp}
-\includegraphics[width=18cm]{gamma_N2.png}
-\caption{\footnotesize Asymptotic relation for different $k$s from which $\gamma$ is extracted}
+\caption{ \footnotesize 
+Testing one parameter scaling for glassy disorder. 
+The variance of $\ln(g)$ (left panel) and the log of the average $-\ln\langle g \rangle$ (right panel)
+are plotted against the scaling parameter $-\langle \ln(g) \rangle$. 
+The calculation is done for powerlaw distributed rates 
+with ${s=15}$ (blue diamonds) and ${s=1.2}$ (red squares).
+The solid line is the standard one parameter scaling prediction for weak disorder, 
+and the dashed line is its asymptotic approximation. 
+One observes that an anomaly develops as the disorder becomes glassy.}
+
+\label{fig:scaling}
 \end{figure}
 
-\subsection{Inverse localization length ($\gamma$)}
+\sect{Inverse localization length ($\gamma$)}\label{sec:gamma}
 %
 In the absence of disorder $\bm{W}$ describes hopping 
 with some rate $w_0$, and the eigenstates are free waves labeled by~$k$. 
-With disorder the~$w_0$ of the unperturbed Hamiltonian is 
-loosely defined as the average~$w$. Later we shall go beyond 
-the Born approximation and will show that it should 
-be the harmonic average (as already defined previously).   
 %
 The disorder couples states that have different~$k$. 
 For diagonal disorder ("pinning") the couplings are proportional to the 
@@ -341,7 +350,6 @@ the off-diagonal elements, and depends on~$b$ and on~$k$ too:
 \eeq
 %
 It follow that for small~$k$ we have ${|W_{k,k'}|^2 \propto b^5 \sigma_{\perp}^2 k^4}$. 
-
 
 The Fermi-Golden-Rule (FGR) picture implies that 
 the scattering rate is ${\tau^{-1}= 2\pi \varrho(\omega) \overline{\left|W_{k',k}\right|^2}}$. 
@@ -364,18 +372,12 @@ From here (without taking the small $k$ approximation) it follows that
 where the prefactors in the square brackets assume ${b\gg1}$, and should be replaced by unity for ${b=1}$.
 In the absence of pinning the localization length diverges ($\gamma \propto k^2$) 
 at the band floor, as assumed by Debye. This behavior is demonstrated in \Fig{f2} 
-for two types of glassy disorder. The deviations from \Eq{FGRw} 
-will be explained in the next paragraphs. 
-
-
-
-
-% gamma vs $k$, box disorder
+for two types of glassy disorder. 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
+\begin{figure}[h]
 
-\includegraphics[width=4cm]{gammaVSkBX}
-\includegraphics[width=4cm]{gammaVSkPL}
+\includegraphics[width=6cm]{gammaVSkBX}
+\includegraphics[width=6cm]{gammaVSkPL}
 
 \caption{The inverse localization length $\gamma$ versus $k$ 
 for logbox distributed rates with $\sigma=10$ (a);   
@@ -394,12 +396,7 @@ as $k$ becomes larger due to the Lifshitz tail anomaly (see text).
 \label{f2}
 \end{figure}
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %
 The Born approximation has assumed weak disorder. 
 Here we would like to consider the more general case 
@@ -430,14 +427,6 @@ The Born approximation \Eq{FGRv} is written as
 \gamma \ \ = \ \ -\langle \ln(r) \rangle \ \ \approx \ \ \frac{1}{8} \, \frac{ \mbox{Var}(f)}{\left[1-(\epsilon/2)^2\right]}
 \eeq
 % 
-This standard estimate does not hold close to the band-edge $\epsilon_0{=}{-}2$. 
-The energy scale that controls the so-called Lifshitz tail region 
-is $\epsilon_c = [\mbox{Var}(f)]^{2/3}$.
-In the region $|\epsilon-\epsilon_0|<\epsilon_c$ the inverse localization 
-length has finite value $\gamma \sim \sqrt{\epsilon_c}$.
-This observation has no dramatic consequences at this stage 
-since we assume a weak pinning potential. 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -489,33 +478,162 @@ were we present our numerical results together with the theoretical predictions.
 %
 Irrespective of that, the inverse localization length $\gamma$ is over-estimated as $k$ becomes larger. 
 We can trace the origin of this discrepancy to the Lifshitz anomaly in the Anderson model.
-The condition ${|\epsilon-\epsilon_0|<\epsilon_c}$ translates into ${\lambda > w_0^{-3}[\mbox{Var}(1/w)]^{-2}}$.
-Thus the anomaly develops not at the band floor but as we go up in~$\omega$, 
-where the inverse localization length becomes $\gamma \propto \omega^{4/3}$ 
-instead of $\gamma \propto \omega^2$. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sect{The average transmission}
+%
+For the calculation of the heat transport we have to know 
+what is  ${ g(\omega) \equiv \langle g \rangle_{\omega} }$. 
+Given $\gamma$ the common approximation 
+is ${ \langle g \rangle \approx \eexp{-(1/2)\gamma L}}$.
+But in-fact this asymptotic approximation can be trusted 
+only for very long samples. More generally, assuming weak disorder, 
+the following result can be derived~\cite{Abrikosov,Shapiro,Izrailev}:
+%
+\be{14}
+\langle g \rangle \ = \ 
+\int_0^\infty\mathrm{d} u
+\ \frac{2\pi u\tanh(\pi u)}{\cosh(\pi u)}
+\ \mathrm{e}^{-\left[\left(\frac{1}{4}+u^2\right)\gamma L\right]}
+\label{gabrik}
+\eeq
+%
+The question arises whether this relation can be trusted 
+also in the case of a glassy disorder, where the 
+one-parameter scaling assumption cannot be justified.
+%
+This is tested in \Fig{fig:scaling}. For weak disorder (large $s$) 
+the expected relation between the first and second moments 
+of $x=-\ln(g)$ is confirmed, namely ${\text{Var}(x)=2\langle x \rangle}$.
+For strong glassy disorder (small $s$) clear deviation 
+from this relation is observed. 
+
+Still we see in \Fig{fig:scaling}b that the failure of one-parameter scaling 
+is not alarming for $\langle g \rangle = \langle \exp[-x] \rangle$.
+The exact calculation of the integral is the solid line,
+while the asymptotic result $\exp[-(1/2)\langle x \rangle]$ 
+is indicated by dashed line. Note that the latter 
+implies ${\langle g \rangle = \exp[(1/4)\langle\ln(g)\rangle]}$. 
+We realize that the asymptotic approximation might be poor, 
+but the exact calculation using \Eq{e14} is quite satisfactory. 
+
+
+% G
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h]
+
+\includegraphics[clip,width=6cm]{G_versus_L}
+\includegraphics[clip,width=6cm]{GsqrtL_sqrtL}
+
+\caption{
+The heat conductance $G$ as a function of $L$ is calculated using \Eq{e5} with \Eq{e5}.
+For the black solid line with symbols we use $\gamma(k)$ that is based on the numerical
+results that have been obtained for a logbox disorder as in \Fig{f2}a with ${\sigma=1}$.  
+For the blue solid line we use the Debye approximation for the density 
+of states, and extrapolate the initial $\gamma\propto k^2$ dependence up to the cutoff $k=\pi$.  
+%
+On the right panel we plot $\sqrt{L}G$ as a function of $L^{1/4}$ 
+in order to highlight the ${\alpha=1/2}$ (dotted red) and the ${\alpha=1/4}$ (dashed red)
+asymptotic dependence for long and short samples respectively. 
+The green dotted line is $G=1$. }
+
+\label{f4}
+\end{figure}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sect{Heat conductance}
+%
+Following  \cite{D08,D01,DL08} the expression for the rate of heat flow from 
+a lead that has temperature $T_H$ to a lead that has temperature $T_C$ is 
+% 
+\beq
+\dot{Q} \ = \ 
+\frac{T_H{-}T_C}{2} \int_{0}^{\infty} \frac{d\omega}{\pi} \ \mathcal{T}(\omega) 
+\ \equiv \ G \, (T_H{-}T_C) \ \ 
+\label{qg}
+\eeq
+%
+Here $\mathcal{T}(\omega)$ is a complicated expression that reflects 
+the transmission of the sample.  
+In an isolated harmonic chain(our model), 
+${\mathcal{T}(\omega)}$ is determined by 
+the couplings of the eigenmodes to the heat reservoirs
+at the left and right leads. 
+In analogy to mesoscopics studies \cite{D08,D01} one can argue that
+%
+\beq
+\mathcal{T}(\omega) \ \ \approx \ \ g(\omega) \ \mathcal{T}^{(0)}(\omega)
+\eeq
+%
+where $\mathcal{T}^{(0)}(\omega)$ refers to a non-disordered sample, 
+and $g(\omega)$ is the disordered averaged transmission. 
+For ``fixed boundary conditions" ${\mathcal{T}^{(0)}(\omega)\sim \eta_0^2\omega^2}$,
+where the damping rate $\eta_0$ characterizes the contact point.
+In contrast, for ``free boundary condition" one obtains ${\mathcal{T}^{(0)}(\omega)\approx 1}$, 
+which is the most optimal possibility. In the latter case  
+%
+\be{17}
+G \ \ = \ \ \frac{c}{2} \int_0^{\pi} \frac{d k}{\pi} \ g(\omega_k) 
+\eeq
+
+The standard approach is to use two {\em incompatible} approximations:
+On the one hand one use the asymptotic estimate ${g(\omega) \sim \eexp{-(1/2)\gamma(\omega) L}}$ 
+which holds for {\em long} samples for which $\gamma L\gg 1$. 
+On the other hand one extends the upper limit of the integration to infinity, 
+arguing that the major contribution to the integral comes from small $\omega$ values.
+% 
+In the absence of pinning $\gamma(\omega)\propto\omega^2$, hence by rescaling 
+of the dummy integration variable it follows that the result of the integral 
+is precisely $\propto 1/\sqrt{L}$. 
+%
+We shall discuss in the next paragraph the limitations of this prediction. 
+Going on with the same logic we can ask what happens in the presence of 
+a weak pinning potential. Using a saddle-point estimate 
+we get $G \sim  \frac{1}{\sqrt{L}} \ \exp\left[ -(1/2) \gamma_0 L \right]$, 
+where $\gamma_0$ is the minimal value of $\gamma(\omega)$. 
+From \Eq{FGRw} with \Eq{FGRv} we deduce $\gamma_{0} \propto b^{-\eta}$, with $\eta=7/2$.
+This explains the leading exponential dependence on the length 
+that has been observed in \cite{BZFK13}. 
+However the above calculation fails in explaining the 
+sub-leading $L$ dependence that survives in the absence of pinning.
+Namely it has been observed that instead of $1/L^{\alpha}$ with $\alpha=1/2$
+the numerical results are characterized by the super-optimal value ${\alpha \approx 1/4}$.  
+
+
+%
+We now focus on the $L$ dependence that survives in the absence of a pinning potential.
+As already note that deviation from the $1/\sqrt{L}$ law is related to two incompatible 
+approximations regarding the~$\gamma$ dependence of~$g$ 
+and the upper limit of of the integration in \Eq{e17}.    
+We can of course do better by using the analytical expression \Eq{e14}.
+For the density of states we can use either numerical results 
+or optionally we can use the Debye approximation. The latter 
+may affect the results {\em quantitatively} but not qualitatively.
+Within the framework of the Debye approximation we assume 
+idealized dependence $\gamma(\omega_k) \propto \sigma_{\perp}^2 k^2$ 
+in accordance with \Eq{FGRw}, up to the cutoff at $k=\pi$.
+%
+The result of the calculation is presented in \Fig{f4}.  
+On the right panel there we plot $\sqrt{L}G$ as a function of $L^{1/4}$ 
+in order to highlight the ${\alpha=1/2}$ and the ${\alpha=1/4}$ 
+asymptotic dependence for long and short samples respectively. 
+Note that in the latter case, as in \cite{BZFK13},  
+a small offset has been included in the fitting procedure.
+We do not think that the ${\alpha=1/4}$ dependence is ``fundamental". 
+The important message here is that a straightforward application 
+of an analytical approach can explain the failure of the $1/\sqrt{L}$ law. 
+We also see that the numerical prefactor of the $1/L^{\alpha}$ dependence 
+is sensitive to the line-shape of the large~$k$ cutoff, 
+hence it is not the same for the numerical spectrum and for its Debye approximation. 
+\\
 
 
 % var[ln(g)] and ln<g> vs <ln(g)>
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{figure}
-
-\includegraphics[clip,width=4cm]{varVSavg}
-\includegraphics[clip,width=4cm]{avgVSavg}
-
-\caption{ \footnotesize 
-Testing one parameter scaling for glassy disorder. 
-The variance of $\ln(g)$ (left panel) and the log of the average $-\ln\langle g \rangle$ (right panel)
-are plotted against the scaling parameter $-\langle \ln(g) \rangle$. 
-The calculation is done for powerlaw distributed rates 
-with ${s=15}$ (blue diamonds) and ${s=1.2}$ (red squares).
-The solid line is the standard one parameter scaling prediction for weak disorder, 
-and the dashed line is its asymptotic approximation. 
-One observes that an anomaly develops as the disorder becomes glassy.}
-
-\label{f3}
-\end{figure}
 
 
 \begin{thebibliography}{99}
